@@ -1,17 +1,17 @@
+import type { Params, Simulation } from '../types';
+import { C, P_A, S } from './constants';
 import { getPosition } from './getPosition';
 import { getVelocity, getVelocityX, getVelocityY } from './getVelocity';
 import { degToRad, isFlying } from './utils';
 
-export interface Params {
-	dt: number;
-	initialVelocity: number;
-	initialHeight: number;
-	alfa: number;
-	A: number;
-}
+export const getParabolicShootingWithAir = (params: Params): Simulation => {
+	const { dt, initialVelocity, initialHeight, m } = params;
 
-export const getParabolicShootingWithAir = (params: Params) => {
-	const { dt, initialVelocity, initialHeight, A } = params;
+	// FD: magnitud de la resistencia del aire
+	// A: FD / 2m
+	const A = (C * S * P_A) / (2 * m);
+
+	console.log(A);
 
 	const alfa = degToRad(params.alfa);
 
@@ -27,7 +27,7 @@ export const getParabolicShootingWithAir = (params: Params) => {
 
 	const pos = [{ x: x[0], y: y[0] }];
 
-	while (isFlying(y)) {
+	while (isFlying(y) || y.length === 1) {
 		t += dt;
 
 		vx.push(getVelocityX({ vAxis: vx, v, A, dt }));
