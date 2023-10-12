@@ -1,22 +1,37 @@
 <script lang="ts">
-	import { getParabolicShootingWithAir } from '$lib/parabolicShooting';
+	import { getParabolicShootingWithAir } from '$lib/parabolicShootingWithAir';
 	import Form from '../components/Form.svelte';
 	import Input from '../components/FormInput.svelte';
-	import type { Simulation } from '../types';
+	import type { Data } from '../types';
 	import Scatter from '../components/Scatter.svelte';
+	import { getParabolicShooting } from '$lib/parabolicShooting';
 
 	let inputValues = {
 		alfa: 45,
 		m: 4.08,
-		dt: 0.01,
+		dt: 0.025,
 		initialHeight: 1,
 		initialVelocity: 270
 	};
 
-	let simulation: Simulation;
+	let simulation: Data[];
 
 	const handleSubmit = () => {
-		simulation = { ...simulation, ...getParabolicShootingWithAir(inputValues) };
+		console.log(inputValues);
+		if (inputValues.alfa === 0 && inputValues.initialHeight === 0) return;
+		const parabolicWithAir = getParabolicShootingWithAir(inputValues);
+		const parabolicIdeal = getParabolicShooting(inputValues);
+
+		simulation = [
+			{
+				id: 'Sin resistencia del aire',
+				data: parabolicIdeal.pos
+			},
+			{
+				id: 'Con resistencia del aire',
+				data: parabolicWithAir.pos
+			}
+		];
 	};
 
 	let width;
@@ -48,15 +63,15 @@
 				bind:value={inputValues.initialVelocity}
 				label={'Velocidad de lanzamiento (en m/s)'}
 				unit="m/s"
-				min="300"
-				max="1500"
+				min="0"
+				max="42"
 			/>
 			<Input
 				bind:value={inputValues.m}
 				label={'Masa del proyectil (en kg)'}
 				unit="kg"
 				min="4"
-				max="100"
+				max="10"
 			/>
 		</Form>
 		<div
@@ -67,9 +82,9 @@
 			{width}
 			{height}
 			<h2 class="text-2xl font-bold text-center">Simulacion</h2>
-			{#if simulation && simulation?.pos}
+			{#if simulation}
 				<!-- <ScatterChart data={simulation.pos} /> -->
-				<Scatter data={[{ id: 'Air Resistance', data: simulation.pos }]} />
+				<Scatter data={simulation} />
 			{/if}
 
 			<!-- {#if simulation && simulation?.pos}

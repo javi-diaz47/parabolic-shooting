@@ -1,50 +1,55 @@
+import { GRAVITY } from './constants';
+import { degToRad } from './utils';
 import type { Params, Simulation } from '../types';
-import { C, P_A, S } from './constants';
-import { getPosition } from './getPosition';
-import { getVelocity, getVelocityX, getVelocityY } from './getVelocity';
-import { degToRad, isFlying } from './utils';
 
-export const getParabolicShootingWithAir = (params: Params): Simulation => {
-	const { dt, initialVelocity, initialHeight, m } = params;
+// Parameters
+// const g: number = 9.8; // Acceleration due to gravity (m/s^2)
+const k: number = 0; // Coefficient of air resistance
 
-	// FD: magnitud de la resistencia del aire
-	// A: FD / 2m
-	const A = (C * S * P_A) / (2 * m);
+// Simulation
+export const getParabolicShooting = ({
+	dt,
+	initialHeight,
+	initialVelocity,
+	m,
+	alfa
+}: Params): Simulation => {
+	// Set initial conditions
+	let x = 0;
+	let y = initialHeight;
+	const vx = [initialVelocity];
+	const vy = [0];
 
-	console.log(A);
+	const pos = [{ x, y }];
 
-	const alfa = degToRad(params.alfa);
+	alfa = degToRad(alfa);
+	let currVx = initialVelocity * Math.cos(alfa);
+	let currVy = initialVelocity * Math.sin(alfa);
 
+	// Perform the simulation
 	let t = 0;
-
-	const vx = [initialVelocity * Math.cos(alfa)];
-	const vy = [initialVelocity * Math.sin(alfa)];
-
-	const v = [getVelocity({ vx, vy })];
-
-	const x = [0];
-	const y = [initialHeight];
-
-	const pos = [{ x: x[0], y: y[0] }];
-
-	while (isFlying(y) || y.length === 1) {
+	while (y > 0 || t === 0) {
 		t += dt;
+		const totalVelocity: number = Math.sqrt(currVx ** 2 + currVy ** 2);
 
-		vx.push(getVelocityX({ vAxis: vx, v, A, dt }));
+		// Calculate forces
+		const gravitationalForce: number = -m * GRAVITY;
+		const airResistanceForce: number = -k * totalVelocity;
 
-		vy.push(getVelocityY({ vAxis: vy, v, A, dt }));
+		// Calculate accelerations
+		const accelerationX: number = (airResistanceForce / m) * Math.cos(alfa);
+		const accelerationY: number = (gravitationalForce + airResistanceForce) / m;
 
-		v.push(getVelocity({ vx, vy }));
+		// Update velocity and position using the Euler method
+		currVx += accelerationX * dt;
+		currVy += accelerationY * dt;
+		x += currVx * dt;
+		y += currVy * dt;
 
-		const currPos = getPosition({ x, y, vx, vy, dt });
-
-		x.push(currPos.x);
-
-		y.push(currPos.y);
-
-		pos.push(currPos);
+		pos.push({ x, y });
+		vx.push(currVx);
+		vy.push(currVy);
 	}
-
 	return {
 		pos,
 		vx,

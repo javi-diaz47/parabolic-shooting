@@ -17,6 +17,7 @@
 		bind:value
 		{max}
 		{min}
+		step="0.1"
 		type="range"
 		class="h-2 w-full cursor-pointer accent-purple-600
 	"
