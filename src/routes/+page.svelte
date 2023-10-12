@@ -8,10 +8,10 @@
 
 	let inputValues = {
 		alfa: 45,
-		m: 4.08,
-		dt: 0.025,
+		m: 13.7,
+		dt: 0.05,
 		initialHeight: 1,
-		initialVelocity: 270
+		initialVelocity: 127
 	};
 
 	let simulation: Data[];
@@ -64,14 +64,14 @@
 				label={'Velocidad de lanzamiento (en m/s)'}
 				unit="m/s"
 				min="0"
-				max="42"
+				max="154"
 			/>
 			<Input
 				bind:value={inputValues.m}
 				label={'Masa del proyectil (en kg)'}
 				unit="kg"
 				min="4"
-				max="10"
+				max="20"
 			/>
 		</Form>
 		<div
@@ -83,20 +83,8 @@
 			{height}
 			<h2 class="text-2xl font-bold text-center">Simulacion</h2>
 			{#if simulation}
-				<!-- <ScatterChart data={simulation.pos} /> -->
 				<Scatter data={simulation} />
 			{/if}
-
-			<!-- {#if simulation && simulation?.pos}
-				{simulation.t}
-				<svg {width} height={500} class="bg-pink-300">
-					<g>
-						{#each simulation.pos as { x, y }}
-							<circle cx={xScale(x)} cy={yScale(y)} r="4" fill="blue" stroke="black" />
-						{/each}
-					</g>
-				</svg>
-			{/if} -->
 		</div>
 	</div>
 </main>

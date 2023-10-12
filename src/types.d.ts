@@ -24,6 +24,7 @@ export interface Params {
 	initialHeight: number;
 	alfa: number;
 	m: number;
+	k?: number;
 }
 
 export interface Simulation {

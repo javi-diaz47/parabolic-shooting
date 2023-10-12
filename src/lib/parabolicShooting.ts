@@ -4,7 +4,7 @@ import type { Params, Simulation } from '../types';
 
 // Parameters
 // const g: number = 9.8; // Acceleration due to gravity (m/s^2)
-const k: number = 0; // Coefficient of air resistance
+// const k: number = 0; // Coefficient of air resistance
 
 // Simulation
 export const getParabolicShooting = ({
@@ -12,13 +12,16 @@ export const getParabolicShooting = ({
 	initialHeight,
 	initialVelocity,
 	m,
-	alfa
+	alfa,
+	k
 }: Params): Simulation => {
 	// Set initial conditions
 	let x = 0;
 	let y = initialHeight;
 	const vx = [initialVelocity];
 	const vy = [0];
+
+	if (!k) k = 0;
 
 	const pos = [{ x, y }];
 
