@@ -35,3 +35,13 @@ export interface Simulation {
 	vy: number[];
 	t: number;
 }
+
+// Scatter
+export interface Data {
+	id: string;
+	data: {
+		x: number;
+		y: number;
+		[key: string]: number;
+	}[];
+}

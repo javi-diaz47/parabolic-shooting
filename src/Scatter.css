@@ -1,0 +1,92 @@
+svg {
+	width: 80%;
+	height: 100%;
+	height: 'intrinsic';
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.scatter_plot_container {
+	display: flex;
+	justify-content: center;
+}
+
+.scatter_legend {
+	color: black;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.scatter_legend_info {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.scatter_legend_span {
+	border-radius: 50%;
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.legend_title {
+	margin-top: 0;
+	margin-bottom: 15px;
+	text-decoration-line: underline;
+}
+
+.legend_note {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.dot_info {
+	position: absolute;
+	display: inline;
+	margin: 0;
+	border-radius: 5px;
+	padding: 5px;
+	box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+path {
+	fill: 'green';
+}
+
+.y-axis {
+	font-size: '10px';
+	font-family: sans-serif;
+	text-anchor: 'end';
+}
+
+.x-axis {
+	font-size: '10px';
+	font-family: sans-serif;
+	text-anchor: 'end';
+}
+
+.tick {
+	opacity: 1;
+}
+
+.tick-start {
+	stroke: black;
+	stroke-opacity: 1;
+}
+
+.tick-grid {
+	stroke: black;
+	stroke-opacity: 0.2;
+	font-size: '11px';
+	color: black;
+}
+
+.tick text {
+	fill: black;
+	text-anchor: start;
+}
+
+circle {
+	transition: all;
+	transition-duration: 250ms;
+}
