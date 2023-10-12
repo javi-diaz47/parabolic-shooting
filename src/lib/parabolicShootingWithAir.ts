@@ -25,7 +25,7 @@ export const getParabolicShootingWithAir = (params: Params): Simulation => {
 	const x = [0];
 	const y = [initialHeight];
 
-	const pos = [{ x: x[0], y: y[0] }];
+	const pos = [{ x: x[0], y: y[0], t }];
 
 	while (isFlying(y) || y.length === 1) {
 		t += dt;
@@ -42,7 +42,7 @@ export const getParabolicShootingWithAir = (params: Params): Simulation => {
 
 		y.push(currPos.y);
 
-		pos.push(currPos);
+		pos.push({ ...currPos, t });
 	}
 
 	return {

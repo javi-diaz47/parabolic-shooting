@@ -45,7 +45,7 @@ const createStoreScatterChart = () => {
 				subset.data.forEach((coor) => {
 					xVals.push(coor['x']);
 					yVals.push(coor['y']);
-					points.push([coor['x'], coor['y'], i]);
+					points.push([coor['x'], coor['y'], i, coor['t']]);
 				});
 				subsets.push(subset.id);
 			});
@@ -56,6 +56,13 @@ const createStoreScatterChart = () => {
 
 			const xScale = xType(xDomain, xRange);
 			const yScale = yType(yDomain, yRange);
+
+			let reactiveFilters = [...colors];
+			const reactiveFilter = (color: string) => {
+				if (reactiveFilters.includes(color))
+					reactiveFilters = reactiveFilters.filter((col) => col !== color);
+				else reactiveFilters = [...reactiveFilters, color];
+			};
 
 			const scaledPoints = points.map((el) => [xScale(el[0]), yScale(el[1]), el[2]]);
 
@@ -75,13 +82,6 @@ const createStoreScatterChart = () => {
 			for (let i = 1; i < yScalefactor + 1; i++) {
 				reactiveYTicks.push(i * reactiveUnit); // TODO make adjustable and account for optional %
 			}
-
-			let reactiveFilters = [...colors];
-			const reactiveFilter = (color: string) => {
-				if (reactiveFilters.includes(color))
-					reactiveFilters = reactiveFilters.filter((col) => col !== color);
-				else reactiveFilters = [...reactiveFilters, color];
-			};
 
 			return {
 				xVals,

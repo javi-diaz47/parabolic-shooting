@@ -31,10 +31,8 @@
 
 	$: storeScatterChart.updateChart(data);
 
-	// .filter((el) => reactiveFilters.includes(colors[el[2]]));
+	$: console.log($storeScatterChart.scaledPoints.map((s) => [s[0], s[1]]));
 </script>
-
-<h2>{data[0].id} - {data[0].data[2].y}</h2>
 
 <div class="scatter_plot_container">
 	<svg
@@ -139,29 +137,45 @@
 	{#if dotInfo}
 		<div
 			class="dot_info"
-			style="left:{dotInfo[2].clientX - (2 / 3) * width + 12}px; 
-      top:{dotInfo[2].clientY -
-				height / 3 +
-				12}px; background-color:{tooltipBackground}; color:{tooltipTextColor}"
+			style="left:{dotInfo[2].clientX + 24}px; 
+      top:{dotInfo[2].clientY +
+				24}px; background-color:{tooltipBackground}; color:{tooltipTextColor}"
 		>
 			<span
 				class="scatter_legend_span"
 				style="background-color: {colors[$storeScatterChart.points[dotInfo[1]][2]]}; height:{width /
 					100}px; width:{width / 100}px; "
 			/>
-			{$storeScatterChart.subsets
-				? $storeScatterChart.subsets[$storeScatterChart.points[dotInfo[1]][2]]
-				: ''}
-			{'x'}: {$storeScatterChart.points[dotInfo[1]][0].toFixed(3)},
-			{'y'}: {$storeScatterChart.points[dotInfo[1]][1].toFixed(3)}
+
+			<div class="flex flex-col">
+				<span class="font-bold">
+					{$storeScatterChart.subsets
+						? $storeScatterChart.subsets[$storeScatterChart.points[dotInfo[1]][2]]
+						: ''}
+				</span>
+				<span>
+					x:
+					{$storeScatterChart.points[dotInfo[1]][0].toFixed(3)}
+					(m)
+				</span>
+				<span>
+					y:
+					{$storeScatterChart.points[dotInfo[1]][1].toFixed(3)}
+					(m)
+				</span>
+				<span>
+					t:
+					{$storeScatterChart.points[dotInfo[1]][3].toFixed(2)}
+					s
+				</span>
+			</div>
 		</div>
 	{/if}
 
 	<!-- Legend/Filters -->
 	<section class="scatter_legend" style="width:{width / 10}px; font-size: {width / 75}px">
 		{#if $storeScatterChart.subsets}
-			<h1 class="legend_title"><b>Legend</b></h1>
-			<h5 class="legend_note">Click to Filter</h5>
+			<h1 class="legend_title"><b>Movimiento</b></h1>
 			{#each $storeScatterChart.subsets as subset, i}
 				<div
 					class="scatter_legend_info"

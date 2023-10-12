@@ -31,6 +31,7 @@ export interface Simulation {
 	pos: {
 		x: number;
 		y: number;
+		t: number;
 	}[];
 	vx: number[];
 	vy: number[];
@@ -43,6 +44,7 @@ export interface Data {
 	data: {
 		x: number;
 		y: number;
+		t: number;
 		[key: string]: number;
 	}[];
 }

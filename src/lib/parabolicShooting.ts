@@ -16,6 +16,8 @@ export const getParabolicShooting = ({
 	k
 }: Params): Simulation => {
 	// Set initial conditions
+	let t = 0;
+
 	let x = 0;
 	let y = initialHeight;
 	const vx = [initialVelocity];
@@ -23,14 +25,13 @@ export const getParabolicShooting = ({
 
 	if (!k) k = 0;
 
-	const pos = [{ x, y }];
+	const pos = [{ x, y, t }];
 
 	alfa = degToRad(alfa);
 	let currVx = initialVelocity * Math.cos(alfa);
 	let currVy = initialVelocity * Math.sin(alfa);
 
 	// Perform the simulation
-	let t = 0;
 	while (y > 0 || t === 0) {
 		t += dt;
 		const totalVelocity: number = Math.sqrt(currVx ** 2 + currVy ** 2);
@@ -49,7 +50,7 @@ export const getParabolicShooting = ({
 		x += currVx * dt;
 		y += currVy * dt;
 
-		pos.push({ x, y });
+		pos.push({ x, y, t });
 		vx.push(currVx);
 		vy.push(currVy);
 	}
