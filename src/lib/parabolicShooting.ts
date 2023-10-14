@@ -1,4 +1,4 @@
-import { GRAVITY } from './constants';
+import { C, GRAVITY, P_A, S } from './constants';
 import { degToRad } from './utils';
 import type { Params, Simulation } from '../types';
 
@@ -13,17 +13,14 @@ export const getParabolicShooting = ({
 	initialVelocity,
 	m,
 	alfa,
-	k
+	airResistant = false
 }: Params): Simulation => {
 	// Set initial conditions
 	let t = 0;
-
 	let x = 0;
 	let y = initialHeight;
 	const vx = [initialVelocity];
 	const vy = [0];
-
-	if (!k) k = 0;
 
 	const pos = [{ x, y, t }];
 
@@ -34,19 +31,22 @@ export const getParabolicShooting = ({
 	// Perform the simulation
 	while (y > 0 || t === 0) {
 		t += dt;
-		const totalVelocity: number = Math.sqrt(currVx ** 2 + currVy ** 2);
+		const currV: number = Math.sqrt(currVx ** 2 + currVy ** 2);
+
+		let Fd = 0;
 
 		// Calculate forces
-		const gravitationalForce: number = -m * GRAVITY;
-		const airResistanceForce: number = -k * totalVelocity;
+		if (airResistant) {
+			Fd = 0.5 * P_A * C * S * currV ** 2;
+		}
 
 		// Calculate accelerations
-		const accelerationX: number = (airResistanceForce / m) * Math.cos(alfa);
-		const accelerationY: number = (gravitationalForce + airResistanceForce) / m;
+		const currAccX = -(Fd / m) * (currVx / currV);
+		const currAccY = -GRAVITY - (Fd / m) * (currVy / currV);
 
 		// Update velocity and position using the Euler method
-		currVx += accelerationX * dt;
-		currVy += accelerationY * dt;
+		currVx += currAccX * dt;
+		currVy += currAccY * dt;
 		x += currVx * dt;
 		y += currVy * dt;
 
@@ -54,6 +54,7 @@ export const getParabolicShooting = ({
 		vx.push(currVx);
 		vy.push(currVy);
 	}
+
 	return {
 		pos,
 		vx,

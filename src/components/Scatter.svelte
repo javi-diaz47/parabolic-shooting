@@ -30,8 +30,6 @@
 	let dotInfo: [number[], number, FocusEvent | MouseEvent];
 
 	$: storeScatterChart.updateChart(data);
-
-	$: console.log($storeScatterChart.scaledPoints.map((s) => [s[0], s[1]]));
 </script>
 
 <div class="scatter_plot_container">

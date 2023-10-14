@@ -8,7 +8,7 @@ export const C = 0.47;
 export const P_A = 1.225;
 
 // r: Radio (misil Spike) (en m)
-export const R = 0.017 / 2;
+export const R = 0.1 / 2;
 
 // S: Area maxima de la sesccion transversal del
 // cuerpo perpendicular al vector velocidad

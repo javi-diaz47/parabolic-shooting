@@ -1,24 +1,25 @@
 <script lang="ts">
-	import { getParabolicShootingWithAir } from '$lib/parabolicShootingWithAir';
+	// import { getParabolicShootingWithAir } from '$lib/parabolicShootingWithAir';
 	import Form from '../components/Form.svelte';
 	import Input from '../components/FormInput.svelte';
-	import type { Data } from '../types';
+	import type { Data, Params } from '../types';
 	import Scatter from '../components/Scatter.svelte';
 	import { getParabolicShooting } from '$lib/parabolicShooting';
 	import DownloadIcon from '../components/DownloadIcon.svelte';
 	import { downloadSpreadsheet } from '$lib/downloadSpreadsheet';
 
-	let inputValues = {
+	let inputValues: Params = {
 		alfa: 45,
-		m: 13.7,
+		m: 40,
 		dt: 0.05,
 		initialHeight: 1,
-		initialVelocity: 127
+		initialVelocity: 200
 	};
 
 	const runSimulation = () => {
-		const parabolicWithAir = getParabolicShootingWithAir(inputValues);
+		// const parabolicWithAir = getParabolicShootingWithAir(inputValues);
 		const parabolicIdeal = getParabolicShooting(inputValues);
+		const parabolicWithAir = getParabolicShooting({ ...inputValues, airResistant: true });
 
 		return [
 			{
@@ -84,14 +85,14 @@
 				label={'Velocidad de lanzamiento (en m/s)'}
 				unit="m/s"
 				min="0"
-				max="154"
+				max="300"
 			/>
 			<Input
 				bind:value={inputValues.m}
 				label={'Masa del proyectil (en kg)'}
 				unit="kg"
-				min="4"
-				max="20"
+				min="10"
+				max="80"
 			/>
 		</Form>
 		<div class="w-2/3 grid gap-4 bg-slate-200 p-6 rounded-lg shadow-xl">
