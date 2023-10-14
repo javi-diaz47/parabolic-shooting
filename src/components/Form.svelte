@@ -3,7 +3,7 @@
 	export let btnText: string;
 </script>
 
-<div class=" grid gap-4 w-1/4 max-w-md bg-slate-200 p-6 rounded-lg shadow-xl">
+<div class="grid items-center gap-4 w-[36rem] max-w-md bg-slate-200 p-6 rounded-lg shadow-xl">
 	<slot />
 	<div class="flex justify-center">
 		<button
