@@ -11,7 +11,7 @@
 	<input bind:value type="number" class="bg-white rounded-lg border-2 border-purple-600 p-2" />
 </label> -->
 
-<label for="customRange1" class="text-black mb-2 inline-block">
+<label for="customRange1" class="text-black text-lg mb-2 inline-block">
 	<span>{label}: {value}{unit}</span>
 	<input
 		bind:value

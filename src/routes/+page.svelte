@@ -74,28 +74,28 @@
 				<h2 class="text-3xl text-center font-bold">Entradas</h2>
 				<Input
 					bind:value={inputValues.initialHeight}
-					label={'Altura inicial (en m)'}
+					label={'Altura inicial (m)'}
 					unit="m"
 					min="0"
 					max="500"
 				/>
 				<Input
 					bind:value={inputValues.alfa}
-					label={'Angulo de disparo (en grados)'}
+					label={'Ángulo de disparo (en grados)'}
 					unit="°"
 					min="0"
 					max="89"
 				/>
 				<Input
 					bind:value={inputValues.initialVelocity}
-					label={'Velocidad de lanzamiento (en m/s)'}
+					label={'Velocidad de lanzamiento (m/s)'}
 					unit="m/s"
 					min="0"
 					max="300"
 				/>
 				<Input
 					bind:value={inputValues.m}
-					label={'Masa del proyectil (en kg)'}
+					label={'Masa del proyectil (kg)'}
 					unit="kg"
 					min="10"
 					max="80"

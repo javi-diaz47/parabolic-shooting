@@ -16,7 +16,7 @@
 			href="/docs"
 			aria-current={$page.url.pathname === '/docs'}
 			class:text-purple-600={$page.url.pathname === '/docs'}
-			class:font-semibold={$page.url.pathname === '/docs'}>Documentacion</a
+			class:font-semibold={$page.url.pathname === '/docs'}>Documentación</a
 		>
 	</ul>
 </navbar>

@@ -16,6 +16,7 @@ specifiers:
   prettier-plugin-svelte: ^2.10.1
   svelte: ^4.0.5
   svelte-check: ^3.4.3
+  svelte-katex: ^0.1.2
   tailwindcss: ^3.3.3
   tslib: ^2.4.1
   typescript: ^5.0.0
@@ -24,6 +25,7 @@ specifiers:
 
 dependencies:
   d3: 7.8.5
+  svelte-katex: 0.1.2
   xlsx: '@cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz'
 
 devDependencies:
@@ -982,6 +984,11 @@ packages:
     engines: {node: '>= 10'}
     dev: false
 
+  /commander/8.3.0:
+    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
+    engines: {node: '>= 12'}
+    dev: false
+
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
@@ -1787,6 +1794,13 @@ packages:
     resolution: {integrity: sha512-Bdboy+l7tA3OGW6FjyFHWkP5LuByj1Tk33Ljyq0axyzdk9//JSi2u3fP1QSmd1KNwq6VOKYGlAu87CisVir6Pw==}
     dev: true
 
+  /katex/0.15.6:
+    resolution: {integrity: sha512-UpzJy4yrnqnhXvRPhjEuLA4lcPn6eRngixW7Q3TJErjg3Aw2PuLFBzTkdUb89UtumxjhHTqL3a5GDGETMSwgJA==}
+    hasBin: true
+    dependencies:
+      commander: 8.3.0
+    dev: false
+
   /keyv/4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
     dependencies:
@@ -2419,6 +2433,12 @@ packages:
     dependencies:
       svelte: 4.2.1
     dev: true
+
+  /svelte-katex/0.1.2:
+    resolution: {integrity: sha512-jgqMgP0hwgsaYKLNa9GGpuEKiwE7Gr6QlDKp3C3QQkIb30G+WEHCljfl+nVCNra1aTr7uIemQmlyMA3avHx6HQ==}
+    dependencies:
+      katex: 0.15.6
+    dev: false
 
   /svelte-preprocess/5.0.4_owepjfq65jcf7gnctgiywsc5om:
     resolution: {integrity: sha512-ABia2QegosxOGsVlsSBJvoWeXy1wUKSfF7SWJdTjLAbx/Y3SrVevvvbFNQqrSJw89+lNSsM58SipmZJ5SRi5iw==}

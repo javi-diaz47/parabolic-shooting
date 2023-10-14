@@ -34,6 +34,7 @@
 	"type": "module",
 	"dependencies": {
 		"d3": "^7.8.5",
+		"svelte-katex": "^0.1.2",
 		"xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz"
 	}
 }
